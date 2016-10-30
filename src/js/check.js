@@ -8,18 +8,18 @@ function getMessage (a, b) {
   } else if (typeof a === 'number') {
     return 'Я прыгнул на ' + (a * 100) + ' сантиметров';
   } else if (Array.isArray(a) && !(b instanceof Array)) {
-  /*  var numberOfSteps = 0
-    for (var i = 0; i < a.lenght; i++) {
-      numberOfSteps += a[i]
-    } */
+    var numberOfSteps = 0
+    for (var i = 0; i < a.length; i++) {
+      numberOfSteps =+ a[i]
+    }
     return 'Я прошел ' + numberOfSteps + ' шагов'
   } else if (Array.isArray(a) && Array.isArray(b)) {
-/*   var distancePath = 0
- var Composition = 0
-  for (var i = 0; i < a.lenght; i++) {
+    var distancePath = 0
+    var Composition = 0
+    for (var i = 0; i < a.length; i++) {
       Composition = a[i] * b[i]
-      distancePath += Composition
-    } */
+      distancePath =+ Composition
+    }
     return 'Я прошел ' + distancePath + ' метров';
   } else {
     return 'Переданы некорректные данные';
