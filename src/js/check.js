@@ -7,7 +7,7 @@ function getMessage (a, b) {
     }
   } else if (typeof a === 'number') {
     return 'Я прыгнул на ' + (a * 100) + ' сантиметров';
-  } else if (Array.isArray(a) && !(b instanceof Array)) {
+  } else if (Array.isArray(a) && !(Array.isArray(b))) {
     var numberOfSteps = 0
     for (var i = 0; i < a.length; i++) {
       numberOfSteps =+ a[i]
