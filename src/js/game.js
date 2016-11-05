@@ -408,7 +408,6 @@ window.Game = (function() {
      * Отрисовка экрана паузы.
      */
     _drawPauseScreen: function() {
-      /*MODULE2-TASK1--*/
       var ctx = this.ctx;
       ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
       ctx.fillRect(40, 60, 420, 40);
