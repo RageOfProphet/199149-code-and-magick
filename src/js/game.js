@@ -411,15 +411,55 @@ window.Game = (function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN:
           console.log('you have won!');
+          /*MODULE2-TASK1--*/
+          var canvas = document.querySelector('canvas');
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle='rgba(0, 0, 0, 0.7)';
+          ctx.fillRect(60, 60, 220, 70);
+          ctx.fillStyle='#ffffff'
+          ctx.fillRect(50, 50, 220, 70);
+          ctx.font = '16px PT Mono';
+          ctx.strokeText('you have won!', 60, 80);
+          /*---MODULE2-TASK1*/
           break;
         case Verdict.FAIL:
           console.log('you have failed!');
+          /*MODULE2-TASK1--*/
+          var canvas = document.querySelector('canvas');
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle='rgba(0, 0, 0, 0.7)';
+          ctx.fillRect(60, 60, 220, 70);
+          ctx.fillStyle='#ffffff'
+          ctx.fillRect(50, 50, 220, 70);
+          ctx.font = '16px PT Mono';
+          ctx.strokeText('you have failed!', 60, 80);
+          /*---MODULE2-TASK1*/
           break;
         case Verdict.PAUSE:
           console.log('game is on pause!');
+          /*MODULE2-TASK1--*/
+          var canvas = document.querySelector('canvas');
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle='rgba(0, 0, 0, 0.7)';
+          ctx.fillRect(60, 60, 220, 70);
+          ctx.fillStyle='#ffffff'
+          ctx.fillRect(50, 50, 220, 70);
+          ctx.font = '16px PT Mono';
+          ctx.strokeText('game is on pause!', 60, 80);
+          /*---MODULE2-TASK1*/
           break;
         case Verdict.INTRO:
           console.log('welcome to the game! Press Space to start');
+          /*MODULE2-TASK1--*/
+          var canvas = document.querySelector('canvas');
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle='rgba(0, 0, 0, 0.7)';
+          ctx.fillRect(40, 50, 450, 50);
+          ctx.fillStyle='#ffffff'
+          ctx.fillRect(30, 40, 450, 50);
+          ctx.font = '16px PT Mono';
+          ctx.strokeText('welcome to the game! Press Space to start', 40, 70);
+          /*---MODULE2-TASK1*/
           break;
       }
     },
