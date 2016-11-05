@@ -415,28 +415,19 @@ window.Game = (function() {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(30, 50, 420, 40);
       ctx.font = '16px PT Mono';
-      /*MODULE2-TASK1--*/
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          /*MODULE2-TASK1--*/
           ctx.strokeText('you have won!', 40, 70);
-          /*---MODULE2-TASK1*/
           break;
         case Verdict.FAIL:
-          /*MODULE2-TASK1--*/
           ctx.strokeText('you have failed!', 40, 70);
-          /*---MODULE2-TASK1*/
           break;
         case Verdict.PAUSE:
-          /*MODULE2-TASK1--*/
           ctx.strokeText('game is on pause!', 40, 70);
-          /*---MODULE2-TASK1*/
           break;
         case Verdict.INTRO:
           console.log('welcome to the game! Press Space to start');
-          /*MODULE2-TASK1--*/
           ctx.strokeText('welcome to the game! Press Space to start', 40, 70);
-          /*---MODULE2-TASK1*/
           break;
       }
     },
