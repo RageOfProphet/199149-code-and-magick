@@ -9,6 +9,7 @@ var hideReview = document.querySelector('.review-fields-text');
 var hideBoth = document.querySelector('.review-fields');
 
 var reviewMarks = document.querySelectorAll('input[name="review-mark"]');
+hideReview.classList.add('invisible');
 
 for (var i = 0; i < reviewMarks.length; i++) {
   reviewMarks[i].onclick = function() {
@@ -39,11 +40,14 @@ function validateForm() {
     } else if (reviewName.value !== '') {
       hideName.classList.add('invisible');
     }
-  } else if (reviewName.value !== '') {
-    hideBoth.classList.add('invisible');
-    isDisabled = false;
-  } else if (reviewText.value !== '') {
+  } else {
     hideReview.classList.add('invisible');
+    if (reviewName.value !== '') {
+      hideBoth.classList.add('invisible');
+      isDisabled = false;
+    } else if (reviewText.value !== '') {
+      hideReview.classList.add('invisible');
+    }
   }
   return isDisabled;
 }
