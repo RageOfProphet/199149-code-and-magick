@@ -5,9 +5,8 @@ var reviewText = document.querySelector('.review-form-field-text');
 var reviewSubmit = document.querySelector('.review-submit');
 
 var hideName = document.querySelector('.review-fields-name');
-//nameIsWritten.setAttribute('required', 'true');
 var hideReview = document.querySelector('.review-fields-text');
-var bothIsWritten = document.querySelector('.review-fields');
+var hideBoth = document.querySelector('.review-fields');
 
 var reviewMarks = document.querySelectorAll('input[name="review-mark"]');
 
@@ -28,12 +27,12 @@ reviewText.oninput = function() {
 function validateForm() {
   var isDisabled = true;
   var checkedValue = parseInt(document.querySelector('input[name="review-mark"]:checked').value, 10);
-  bothIsWritten.classList.remove('invisible');
+  hideBoth.classList.remove('invisible');
   hideReview.classList.remove('invisible');
   hideName.classList.remove('invisible');
   if(checkedValue < 3) {
     if((reviewName.value !== '') && (reviewText.value !== '')) {
-      bothIsWritten.classList.add('invisible');
+      hideBoth.classList.add('invisible');
       isDisabled = false;
     } else if (reviewText.value !== '') {
       hideReview.classList.add('invisible');
@@ -41,7 +40,7 @@ function validateForm() {
       hideName.classList.add('invisible');
     }
   } else if (reviewName.value !== '') {
-    bothIsWritten.classList.add('invisible');
+    hideBoth.classList.add('invisible');
     isDisabled = false;
   } else if (reviewText.value !== '') {
     hideReview.classList.add('invisible');
