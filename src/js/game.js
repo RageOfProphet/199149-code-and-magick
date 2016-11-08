@@ -425,7 +425,6 @@ window.Game = (function() {
           ctx.strokeText('game is on pause!', 40, 70);
           break;
         case Verdict.INTRO:
-          console.log('welcome to the game! Press Space to start');
           ctx.strokeText('welcome to the game! Press Space to start', 40, 70);
           break;
       }
