@@ -14,9 +14,6 @@ var reviewMarks = document.querySelectorAll('input[name="review-mark"]');
 var currentVote = window.Cookies.get('review-mark') || 3;
 var currentName = window.Cookies.get('review-name') || '';
 
-console.log(currentVote);
-console.log(currentName);
-
 for (var i = 0; i < reviewMarks.length; i++) {
   reviewMarks[i].onclick = function() {
     reviewSubmit.disabled = validateForm();
@@ -99,11 +96,8 @@ window.form = (function() {
   reviewForm.onsubmit = function(e) {
     e.preventDefault();
     var checkedValue = parseInt(document.querySelector('input[name="review-mark"]:checked').value, 10);
-
-    window.Cookies.set('review-mark', checkedValue, {expires: calculateExpiresDays() });
-    console.log(checkedValue);
-    window.Cookies.set('review-name', reviewName.value, {expires: calculateExpiresDays() });
-    console.log(reviewName.value);
+    window.Cookies.set('review-mark', checkedValue, {expires: calculateExpiresDays()});
+    window.Cookies.set('review-name', reviewName.value, {expires: calculateExpiresDays()});
     this.submit();
   };
 
