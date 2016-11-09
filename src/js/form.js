@@ -6,10 +6,13 @@ var reviewSubmit = document.querySelector('.review-submit');
 
 var hideName = document.querySelector('.review-fields-name');
 var hideReview = document.querySelector('.review-fields-text');
+hideReview.classList.add('invisible');
 var hideBoth = document.querySelector('.review-fields');
 
 var reviewMarks = document.querySelectorAll('input[name="review-mark"]');
-hideReview.classList.add('invisible');
+
+var currentVote = window.Cookies.get('review-mark') || 3;
+var currentName = window.Cookies.get('review-name') || '';
 
 for (var i = 0; i < reviewMarks.length; i++) {
   reviewMarks[i].onclick = function() {
@@ -52,9 +55,11 @@ function validateForm() {
   return isDisabled;
 }
 
+
 window.form = (function() {
   var formContainer = document.querySelector('.overlay-container');
   var formCloseButton = document.querySelector('.review-form-close');
+  var reviewForm = document.querySelector('.review-form');
 
   var form = {
     onClose: null,
@@ -76,11 +81,33 @@ window.form = (function() {
     }
   };
 
+  function calculateExpiresDays() {
+    var nowDate = new Date();
+    var currentYear = nowDate.getFullYear();
+    var birthDate = new Date('12-9');
+    birthDate.setFullYear(currentYear);
+    if (birthDate > nowDate) {
+      birthDate.setFullYear(+currentYear - 1);
+    }
+    var expiresDays = Math.floor((nowDate - birthDate) / (24 * 60 * 60 * 1000));
+    return expiresDays;
+  }
+
+  reviewForm.onsubmit = function(e) {
+    e.preventDefault();
+    var checkedValue = parseInt(document.querySelector('input[name="review-mark"]:checked').value, 10);
+    window.Cookies.set('review-mark', checkedValue, {expires: calculateExpiresDays()});
+    window.Cookies.set('review-name', reviewName.value, {expires: calculateExpiresDays()});
+    this.submit();
+  };
 
   formCloseButton.onclick = function(evt) {
     evt.preventDefault();
     form.close();
   };
+
+  reviewName.value = currentName;
+  document.querySelector('#review-mark-' + currentVote ).checked = true;
 
   return form;
 })();
