@@ -11,8 +11,9 @@ var hideBoth = document.querySelector('.review-fields');
 
 var reviewMarks = document.querySelectorAll('input[name="review-mark"]');
 
-var currentVote = window.Cookies.get('review-mark');
-var currentName = window.Cookies.get('review-name');
+var currentVote = window.Cookies.get('review-mark') || 3;
+var currentName = window.Cookies.get('review-name') || '';
+
 console.log(currentVote);
 console.log(currentName);
 
@@ -54,11 +55,6 @@ function validateForm() {
       hideReview.classList.add('invisible');
     }
   }
-  reviewSubmit.onclick = function() {
-    console.log(checkedValue, reviewName.value);
-    window.Cookies.set('review-mark', checkedValue);
-    window.Cookies.set('review-name', reviewName.value);
-  };
   return isDisabled;
 }
 
@@ -66,6 +62,7 @@ function validateForm() {
 window.form = (function() {
   var formContainer = document.querySelector('.overlay-container');
   var formCloseButton = document.querySelector('.review-form-close');
+  var reviewForm = document.querySelector('.review-form');
 
   var form = {
     onClose: null,
@@ -87,11 +84,36 @@ window.form = (function() {
     }
   };
 
+  function calculateExpiresDays() {
+    var nowDate = new Date();
+    var currentYear = nowDate.getFullYear();
+    var birthDate = new Date('12-9');
+    birthDate.setFullYear(currentYear);
+    if (birthDate > nowDate) {
+      birthDate.setFullYear(+currentYear - 1);
+    }
+    var expiresDays = Math.floor((nowDate - birthDate) / (24 * 60 * 60 * 1000));
+    return expiresDays;
+  }
+
+  reviewForm.onsubmit = function(e) {
+    e.preventDefault();
+    var checkedValue = parseInt(document.querySelector('input[name="review-mark"]:checked').value, 10);
+
+    window.Cookies.set('review-mark', checkedValue, {expires: calculateExpiresDays() });
+    console.log(checkedValue);
+    window.Cookies.set('review-name', reviewName.value, {expires: calculateExpiresDays() });
+    console.log(reviewName.value);
+    this.submit();
+  };
 
   formCloseButton.onclick = function(evt) {
     evt.preventDefault();
     form.close();
   };
+
+  reviewName.value = currentName;
+  document.querySelector('#review-mark-' + currentVote ).checked = true;
 
   return form;
 })();
