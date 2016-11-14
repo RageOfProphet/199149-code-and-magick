@@ -11,11 +11,11 @@ var reviews = [{
 }];
 
 var IMAGE_LOAD_TIMEOUT = 10000;
-  /*function hideFilters() {
-    var reviewsFilter = document.querySelector('.reviews-filter');
-    reviewsFilter.classList.add('invisible');
-  }
-  hideFilters();*/
+/*function hideFilters() {
+  var reviewsFilter = document.querySelector('.reviews-filter');
+  reviewsFilter.classList.add('invisible');
+}
+hideFilters();*/
 
 var container = document.querySelector('.review-list');
 var template = document.querySelector('#review-template');
@@ -24,11 +24,12 @@ var templateContainer = 'content' in template ? template.content : template;
 
 var getReviewElement = function(review) {
   var reviewElement = templateContainer.querySelector('.review').cloneNode(true);
-
-  reviewElement.querySelector('.review-rating').textContent = reviews.rating;
+  reviewElement.querySelector('.review-author').textContent = review.author.name;
+  console.log(review.author.name);
+  reviewElement.querySelector('.review-rating').textContent = review.rating;
   console.log(review.rating);
-  reviewElement.querySelector('.review-text').textContent = reviews.description;
-
+  reviewElement.querySelector('.review-text').textContent = review.description;
+  console.log(review.description);
   var backgroundImage = new Image();
   var backgroundImageTimeout = null;
 
@@ -49,9 +50,6 @@ var getReviewElement = function(review) {
   return reviewElement;
 };
 
-var renderReview = function() {
-  reviews.forEach(function() {
-    container.appendChild(getReviewElement(review));
-  });
-};
-renderReview();
+reviews.forEach(function(review) {
+  container.appendChild(getReviewElement(review));
+});
