@@ -1,5 +1,13 @@
 'use strict';
 
+var container = document.querySelector('.reviews-list');
+var template = document.querySelector('#review-template');
+var templateContainer = 'content' in template ? template.content : template;
+
+var reviewsFilter = document.querySelector('.reviews-filter');
+
+var IMAGE_LOAD_TIMEOUT = 3000;
+
 var loadUrl = 'http://localhost:1507/api/reviews';
 
 var load = function(url, callback, callbackName) {
@@ -7,37 +15,18 @@ var load = function(url, callback, callbackName) {
     callbackName = 'cb' + Date.now();
   }
   window.callbackName = function(data) {
-    console.log(data);
     callback(data);
   };
 
   var script = document.createElement('script');
   script.src = url + '?callback=' + callbackName;
-  console.log(script);
   document.body.appendChild(script);
 };
-
-var printData = function(data) {
-  console.log(data);
-};
-
-load(loadUrl, printData, 'jsonpCallback');
-
-/*-------------------
-
-var reviewsFilter = document.querySelector('.reviews-filter');
-
-var IMAGE_LOAD_TIMEOUT = 3000;
 
 function hideFilters() {
   reviewsFilter.classList.add('invisible');
 }
 hideFilters();
-
-var container = document.querySelector('.reviews-list');
-var template = document.querySelector('#review-template');
-var templateContainer = 'content' in template ? template.content : template;
-
 
 var getReviewElement = function(review) {
   var reviewElement = templateContainer.querySelector('.review').cloneNode(true);
@@ -73,12 +62,12 @@ var renderReviews = function(reviews) {
     container.appendChild(getReviewElement(review));
   });
 };
-//renderReviews();
 
 function showFilters() {
   reviewsFilter.classList.remove('invisible');
 }
 showFilters();
 
-*/
+load(loadUrl, renderReviews, 'jsonpCB');
+
 
