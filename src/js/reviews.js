@@ -49,9 +49,8 @@ var getReviewElement = function(review) {
   return reviewElement;
 };
 
-var renderReview = function(reviewsArray) {
-  reviewsArray.forEach(function(review) {
-    getReviewElement(review);
+var renderReview = function() {
+  reviews.forEach(function() {
     container.appendChild(getReviewElement(review));
   });
 };
