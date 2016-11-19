@@ -1,7 +1,7 @@
 'use strict';
 
-define(['./form', './game', './load', './reviews'],
-function(form, Game, load, renderReviews) {
+define(['./form', './game', './gallery.js', './load', './reviews'],
+function(form, Game, Gallery, load, renderReviews) {
   var game = new Game(document.querySelector('.demo'));
   game.initializeLevelAndStart();
   game.setGameStatus(Game.Verdict.INTRO);
@@ -23,4 +23,20 @@ function(form, Game, load, renderReviews) {
   };
   var loadUrl = 'http://localhost:1507/api/reviews';
   load(loadUrl, renderReviews, 'jsonpCB');
+
+  var pictures = [];
+  var galleryImages = document.querySelectorAll('.photogallery-image img');
+  var galleryImagesArray = Array.prototype.slice.call(galleryImages);
+
+  for (var i = 0; i < galleryImages.length; i++) {
+    pictures[i] = galleryImages[i].src;
+  }
+
+  var gallery = new Gallery(pictures);
+
+  galleryImagesArray.forEach(function(picture, currentPicture) {
+    picture.onclick = function() {
+      gallery.show(currentPicture);
+    };
+  });
 });
